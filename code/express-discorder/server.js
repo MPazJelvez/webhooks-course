@@ -18,8 +18,12 @@ app.get("/", (req, res) => res.send(`
 `));
 
 app.post("/github", (req, res) => {
-  const content = ":wave: Hi mom!";
-  const avatarUrl = "https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif";
+  //To do: change the content variable to contain repository name
+  //and the github user name... and emoji flair
+  const username = req.body.sender.login
+  const repository = req.body.repository.name
+  const content = `:tada: ${username} le dejó una estrellita al repositorio ${repository} :star: :rocket:`
+  const avatarUrl = req.body.sender.avatar_url;
   axios
     .post(process.env.DISCORD_WEBHOOK_URL, {
       content: content,
